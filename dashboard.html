@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — LXX Language XTRAX</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <a href="index.html" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:10px;">
+      <span class="hex">⬡</span>
+      <span>LXX <span class="version">v1.0.0</span></span>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="download.html">Download</a>
+    <a href="#" onclick="Auth.logout(); return false;" class="btn-ghost" style="font-size:0.9rem;">Sign Out</a>
+  </div>
+</nav>
+
+<div class="dashboard-page container">
+  <div class="dash-header">
+    <div class="dash-user">
+      <div class="dash-avatar" id="dash-avatar">?</div>
+      <div>
+        <div class="dash-email" id="dash-email">Loading…</div>
+        <div class="dash-tier" id="dash-tier">Free</div>
+      </div>
+    </div>
+    <a href="download.html" class="btn btn-primary">⬇ Download LXX</a>
+  </div>
+
+  <div class="dash-grid">
+    <div class="dash-card">
+      <h3>Account Status</h3>
+      <div class="value" id="dash-status-value">—</div>
+    </div>
+    <div class="dash-card">
+      <h3>Plan</h3>
+      <div class="value" id="dash-plan-value">—</div>
+    </div>
+    <div class="dash-card">
+      <h3>Premium Features</h3>
+      <div id="dash-premium-features" style="margin-top:0.5rem; font-size:0.88rem; color:var(--muted);">
+        Loading…
+      </div>
+    </div>
+    <div class="dash-card">
+      <h3>Your Auth Token</h3>
+      <p style="font-size:0.82rem; color:var(--muted); margin-top:0.25rem;">
+        Paste this into LXX on first launch to link your account.
+      </p>
+      <div class="token-box" id="dash-token">—</div>
+      <button onclick="copyToken()" class="btn btn-outline mt-2" style="font-size:0.82rem; padding:0.4rem 0.9rem;">
+        Copy Token
+      </button>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem;">
+    <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.75rem;">How to link your account to LXX</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Download and launch LXX</h4>
+          <p>Go to the <a href="download.html">download page</a> and follow the setup instructions.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Copy your Auth Token</h4>
+          <p>Click the "Copy Token" button above to copy your personal token.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Paste into LXX</h4>
+          <p>In the LXX overlay, open Settings → Account → paste your token. LXX will verify and unlock your tier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>⬡ LXX — Language XTRAX &nbsp;·&nbsp; v1.0.0</p>
+</footer>
+
+<script src="js/auth.js"></script>
+<script>
+  if (!Auth.requireAuth()) throw new Error("not authed");
+
+  const FREE_FEATURES = [
+    "UwU Speak", "Glitch / Zalgo", "Pig Latin", "L33tspeak",
+    "Reverse", "Mock / Spongebob", "Tiny Caps", "Bold Text", "Bubble Text",
+    "Keyboard Interceptor", "Live Preview"
+  ];
+
+  const PREMIUM_ONLY = [
+    "Real Language Translation (100+ languages)",
+    "Screen OCR Translation",
+    "Screen Translate → Custom Language",
+    "Custom Language Builder",
+    "Cloud Sync",
+  ];
+
+  async function init() {
+    const user = await Auth.fetchMe();
+    if (!user) return;
+
+    const initial = user.email[0].toUpperCase();
+    document.getElementById("dash-avatar").textContent = initial;
+    document.getElementById("dash-email").textContent = user.email;
+
+    const isPremium = user.premium;
+
+    document.getElementById("dash-tier").textContent = isPremium ? "⭐ XTRAX PREMIUM" : "Free Tier";
+    document.getElementById("dash-tier").className = "dash-tier " + (isPremium ? "premium" : "free");
+    document.getElementById("dash-status-value").textContent = "✅ Active";
+    document.getElementById("dash-status-value").style.color = "var(--success)";
+    document.getElementById("dash-plan-value").textContent = isPremium ? "XTRAX PREMIUM ⭐" : "Free";
+    document.getElementById("dash-plan-value").className = "value " + (isPremium ? "gold" : "purple");
+    document.getElementById("dash-token").textContent = Auth.getToken();
+
+    const featEl = document.getElementById("dash-premium-features");
+    let html = "";
+    for (const f of FREE_FEATURES) {
+      html += `<div style="padding:2px 0; color:var(--success)">✓ ${f}</div>`;
+    }
+    for (const f of PREMIUM_ONLY) {
+      if (isPremium) {
+        html += `<div style="padding:2px 0; color:var(--gold)">⭐ ${f}</div>`;
+      } else {
+        html += `<div style="padding:2px 0; color:var(--muted2)">🔒 ${f}</div>`;
+      }
+    }
+    featEl.innerHTML = html;
+  }
+
+  function copyToken() {
+    const t = Auth.getToken();
+    navigator.clipboard.writeText(t).then(() => {
+      const btn = event.target;
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy Token", 2000);
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>
