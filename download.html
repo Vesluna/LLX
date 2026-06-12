@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download — LXX Language XTRAX</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="hex">⬡</span>
+    <span>LXX <span class="version">v1.0.0</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a id="nav-auth-link" href="login.html" class="nav-cta">Sign In</a>
+  </div>
+</nav>
+
+<div class="download-hero">
+  <div class="hero-badge" style="margin-bottom:1.25rem;">⬡ v1.0.0 — Windows 10 / 11</div>
+  <h1 style="font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; margin:0 0 1rem; letter-spacing:-0.03em;">
+    Download <span style="background:linear-gradient(135deg,#c084fc,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">LXX</span>
+  </h1>
+  <p style="color:var(--muted); max-width:500px; margin:0 auto 2rem; font-size:1rem;">
+    Requires Python 3.8–3.13 from python.org. Setup takes about 2 minutes.
+  </p>
+  <div class="flex-center">
+    <a href="https://github.com/Vesluna/LLX/releases/download/v1.0.0/lxx-v1.0.0.zip"
+       class="btn btn-primary" style="font-size:1rem; padding:0.9rem 2.25rem;">
+      ⬇ Download v1.0.0 (.zip)
+    </a>
+    <a href="login.html" class="btn btn-outline">Create Account</a>
+  </div>
+</div>
+
+<section>
+  <div class="container" style="max-width:720px;">
+
+    <div class="section-label">Requirements</div>
+    <h2 class="section-title" style="font-size:1.7rem;">Before you install</h2>
+
+    <div class="info-box mt-2">
+      <p style="font-size:0.9rem; color:var(--muted); margin-bottom:1rem; line-height:1.65;">
+        LXX requires <strong style="color:var(--text);">Python 3.8–3.13</strong> installed from
+        <a href="https://www.python.org/downloads/" target="_blank">python.org</a>.
+        The Microsoft Store version of Python will <em>not</em> work.
+      </p>
+
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
+           class="btn btn-outline" style="font-size:0.84rem;">
+          ⬇ Python 3.13 (Recommended)
+        </a>
+        <a href="https://www.python.org/ftp/python/3.11.12/python-3.11.12-amd64.exe"
+           class="btn btn-outline" style="font-size:0.84rem;">
+          ⬇ Python 3.11 (Stable)
+        </a>
+      </div>
+
+      <div class="warn-box">
+        <span>⚠️</span>
+        <span><strong>Check "Add Python to PATH"</strong> on the first screen of the Python installer — otherwise Windows won't find Python when you run the scripts.</span>
+      </div>
+    </div>
+
+    <div class="section-label mt-3">Setup</div>
+    <h2 class="section-title" style="font-size:1.7rem; margin-bottom:0.5rem;">Installation steps</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Download and extract the zip</h4>
+          <p>Click the Download button above. Right-click the .zip → Extract All → choose a folder like <code>C:\LXX\</code>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Run setup (installs dependencies)</h4>
+          <p>Double-click <code>setup.bat</code> inside the extracted folder. It automatically runs:</p>
+          <div class="code-block">pip install customtkinter keyboard pyperclip</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Launch LXX</h4>
+          <p>Double-click <code>run.bat</code>, or open a terminal in the folder and run:</p>
+          <div class="code-block">python main.py</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Link your account (optional)</h4>
+          <p><a href="login.html">Create an account</a>, copy your Auth Token from the Dashboard, and click <strong style="color:var(--text);">Link Account</strong> in the LXX overlay. This unlocks Premium if you have it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box mt-3">
+      <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:1rem; color:var(--text2);">⌨️ Hotkeys</h3>
+      <table style="width:100%; font-size:0.875rem; border-collapse:collapse;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.55rem 0; color:var(--accent3); font-family:'JetBrains Mono',monospace; font-weight:700; white-space:nowrap; padding-right:1.5rem;">Ctrl + Space</td>
+          <td style="padding:0.55rem 0; color:var(--muted);">Transform &amp; replace what you just typed</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.55rem 0; color:var(--accent3); font-family:'JetBrains Mono',monospace; font-weight:700; white-space:nowrap; padding-right:1.5rem;">Ctrl + Shift + Space</td>
+          <td style="padding:0.55rem 0; color:var(--muted);">Toggle overlay visible / hidden</td>
+        </tr>
+        <tr>
+          <td style="padding:0.55rem 0; color:var(--accent3); font-family:'JetBrains Mono',monospace; font-weight:700; white-space:nowrap; padding-right:1.5rem;">Ctrl + Shift + X</td>
+          <td style="padding:0.55rem 0; color:var(--muted);">Toggle keyboard interceptor on / off</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="info-box mt-2" style="border-left:3px solid var(--accent);">
+      <h3 style="font-size:0.92rem; font-weight:700; margin-bottom:0.5rem; color:var(--text2);">🔧 Troubleshooting</h3>
+      <p style="font-size:0.86rem; color:var(--muted); line-height:1.7;">
+        <strong style="color:var(--text);">"python is not recognized"</strong> — Re-run the Python installer and check "Add Python to PATH".<br>
+        <strong style="color:var(--text);">Keyboard hook fails</strong> — Right-click <code>run.bat</code> → Run as Administrator.<br>
+        <strong style="color:var(--text);">Black screen / no window</strong> — Make sure you extracted the .zip fully before running.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand"><span class="hex">⬡</span> LXX — Language XTRAX</div>
+  <p>v1.0.0</p>
+</footer>
+
+<script src="js/auth.js"></script>
+<script>
+  const link = document.getElementById("nav-auth-link");
+  if (Auth.isLoggedIn()) {
+    link.textContent = "Dashboard";
+    link.href = "dashboard.html";
+  }
+</script>
+</body>
+</html>
